@@ -1,40 +1,105 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
-    <style>
-      body {
-        background-color: #f0f0f0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
 
-      .border {
-        background-color: aqua;
-      }
-    </style>
-    <title>Pedido</title>
-  </head>
-  <body>
-    <div><h3 class="display-6">Restaurante do Japa</h3></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <div class="container">
-      <div class="border-0">
-        <div class="d-flex justify-content-center">
-          <h2>Revise seu pedido:</h2>
+  <!-- Bootstrap link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+  <!-- JavaScript link -->
+  <script src="./script.js"></script>
+  <script src="./api.js"></script>
+
+  <!-- CSS link -->
+  <link rel="stylesheet" href="./style.css">
+
+  <title>Pedido</title>
+</head>
+
+<body>
+  <div>
+    <!-- TODO: Refazer o logo do restaurante -->
+    <h3 class="display-6">Restaurante do Japa</h3>
+  </div>
+
+  <div class="container">
+    <div id="border">
+      <div class="d-flex justify-content-center mb-3">
+        <h2>Revise seu pedido:</h2>
+      </div>
+
+      <div class="row">
+        <div class="col mb-3">
+          <h6 class="display-6 text-secondary  text-bg-light d-flex justify-content-center rounded border-bottom-0">
+            Itens
+            Adicionados</h6>
+
+          <ul class="list-group"></ul>
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1">Escolha:</span>
-          <input type="text" class="form-control" placeholder="Username" />
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addcon1">Quantidade:</span>
+            <input type="text" class="form-control" name="quantidade" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addcon1">Valor:</span>
+            <input type="text" class="form-control" name="valor" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addcon1">Frete:</span>
+            <input type="text" class="form-control" name="frete" />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addcon1">Tempo de entrega estimada:</span>
+            <input type="text" class="form-control" name="tempoEntrega" />
+          </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+
+  <!-- Chamada da função de iniciação da página -->
+  <script>
+    calculaTempoEntrega();
+    listaPedidos();
+    somaValor();
+    somaQuantidade();
+  </script>
+
+  <!-- Chamada da função de calculo do Frete -->
+  <script type="module">
+    let frete = document.getElementsByName("frete");
+
+    // TODO: Arrumar os CEP's para ficar dinamico com o cadastro
+    let cepOrigem = '86082120';
+    let cepDestino = '86087636';
+
+    //Ativar loading do campo
+    frete[0].value = 'Carregando...';
+
+    let cepDistance = await getDistance(cepOrigem, cepDestino);
+
+    //A função tira o loading e substitui os valores no próprio escopo
+    calculaFrete(cepDistance.distance)
+  </script>
+
+</body>
+
 </html>
