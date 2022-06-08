@@ -7,22 +7,26 @@ var pedidos = [
   { name: "Coca-Cola 2Lts", value: 8.7 },
 ];
 
-//Função que atribui o valor do frete (Aleatório)
+//Função que atribui o valor do frete
 function calculaFrete(distance) {
   let frete = document.getElementsByName("frete");
-  let PRECO_POR_KM = 1.75;
+  const PRECO_POR_KM = 1.75;
 
   frete[0].value = `R$${(distance * PRECO_POR_KM).toFixed(0)},00`;
 }
 
-//Função que calcula o tempo de entrega (Aleatório)
-function calculaTempoEntrega() {
-  //TODO: trocar o tempo para o tempo real com base na distancia
-  let randomTempo = Math.random() * (120 - 30) + 30;
-
+//Função que calcula o tempo de entrega
+function calculaTempoEntrega(distance) {
   let tempoEntrega = document.getElementsByName("tempoEntrega");
 
-  tempoEntrega[0].value = `${randomTempo.toFixed(0)} minutos`;
+  const ENTREGA_MINIMA = 30;
+  let entregaEstimada = ENTREGA_MINIMA;
+
+  if (distance > 3) {
+    entregaEstimada = ENTREGA_MINIMA * 2;
+  }
+
+  tempoEntrega[0].value = `${entregaEstimada.toFixed(0)} minutos`;
 }
 
 //Função que faz a listagem dos produtos selecionados
