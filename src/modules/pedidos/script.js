@@ -7,12 +7,37 @@ var pedidos = [
   { name: "Coca-Cola 2Lts", value: 8.7 },
 ];
 
+//Função que checa se as cidades são iguais
+function checkCidades(cidades) {
+  if (cidades) {
+    return cidades[0].localidade === cidades[1].localidade;
+  }
+
+  return false;
+}
+
+//Função que dispara uma mensagem informativa na tela
+function setInfoCep() {
+  var d1 = document.getElementsByName("infoFrete");
+
+  d1[0].insertAdjacentHTML(
+    "afterend",
+    '<div class="alert alert-primary d-flex justify-content-center" role="alert">Localidade não atendida</div>'
+  );
+}
+
 //Função que atribui o valor do frete
-function calculaFrete(distance) {
+function calculaFrete(cidades) {
   let frete = document.getElementsByName("frete");
   const PRECO_POR_KM = 1.75;
 
-  frete[0].value = `R$${(distance * PRECO_POR_KM).toFixed(0)},00`;
+  if (cidades.cepsInfo && checkCidades(cidades.cepsInfo)) {
+    frete[0].value = `R$${(cidades.distance * PRECO_POR_KM).toFixed(0)},00`;
+  } else {
+    setInfoCep();
+
+    frete[0].value = "Não atendido";
+  }
 }
 
 //Função que calcula o tempo de entrega
