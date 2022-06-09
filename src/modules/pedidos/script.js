@@ -7,8 +7,24 @@ var pedidos = [
   { name: "Coca-Cola 2Lts", value: 8.7 },
 ];
 
+//Função que captura todos os fields
+function getFields() {
+  let obj = {};
+
+  //Criação do objeto com todas as propriedades dos campos
+  obj["infoFrete"] = document.getElementsByName("infoFrete");
+  obj["frete"] = document.getElementsByName("frete");
+  obj["tempoEntrega"] = document.getElementsByName("tempoEntrega");
+  obj["valor"] = document.getElementsByName("valor");
+  obj["quantidade"] = document.getElementsByName("quantidade");
+  obj["listGroup"] = document.getElementsByClassName("list-group");
+
+  return obj;
+}
+
 //Função que checa se as cidades são iguais
 function checkCidades(cidades) {
+  //Validação básica de localidade
   if (cidades) {
     return cidades[0].localidade === cidades[1].localidade;
   }
@@ -17,26 +33,38 @@ function checkCidades(cidades) {
 }
 
 //Função que dispara uma mensagem informativa na tela
-function setInfoCep() {
-  var d1 = document.getElementsByName("infoFrete");
+function setInfoCep(cityError) {
+  let field = getFields().infoFrete;
 
-  d1[0].insertAdjacentHTML(
-    "afterend",
-    '<div class="alert alert-primary d-flex justify-content-center" role="alert">Localidade não atendida</div>'
-  );
+  //Validação de erros
+  if (cityError?.error) {
+    //Atibuição do card de erro
+    field[0].insertAdjacentHTML(
+      "afterend",
+      `<div class="alert alert-danger d-flex justify-content-center" role="alert">${cityError.error}</div>`
+    );
+  } else {
+    //Atibuição do card de erro
+    field[0].insertAdjacentHTML(
+      "afterend",
+      '<div class="alert alert-primary d-flex justify-content-center" role="alert">Localidade não atendida</div>'
+    );
+  }
 }
 
 //Função que atribui o valor do frete
 function calculaFrete(cidades) {
-  let frete = document.getElementsByName("frete");
+  let frete = getFields().frete;
   const PRECO_POR_KM = 1.75;
 
+  //Validação de CEP
   if (cidades.cepsInfo && checkCidades(cidades.cepsInfo)) {
     frete[0].value = `R$${(cidades.distance * PRECO_POR_KM).toFixed(0)},00`;
   } else {
-    setInfoCep();
+    setInfoCep(cidades);
 
     frete[0].value = "Não atendido";
+    calculaTempoEntrega(cidades);
   }
 }
 
@@ -51,12 +79,17 @@ function calculaTempoEntrega(distance) {
     entregaEstimada = ENTREGA_MINIMA * 2;
   }
 
-  tempoEntrega[0].value = `${entregaEstimada.toFixed(0)} minutos`;
+  //Validação de erros
+  if (!distance) {
+    tempoEntrega[0].value = `Não atendido`;
+  } else {
+    tempoEntrega[0].value = `${entregaEstimada.toFixed(0)} minutos`;
+  }
 }
 
 //Função que faz a listagem dos produtos selecionados
 function listaPedidos() {
-  var ul = document.getElementsByClassName("list-group");
+  var ul = getFields().listGroup;
 
   pedidos.map((pedido) => {
     var name = `list-group-item d-flex justify-content-center`;
@@ -74,16 +107,18 @@ function listaPedidos() {
 function somaValor() {
   let total = 0;
 
+  //Iteração do valor dos pedidos
   pedidos.map((pedido) => (total += pedido.value));
 
-  let valor = document.getElementsByName("valor");
+  let valor = getFields().valor;
 
+  //Return do valor formatado
   valor[0].value = `R$${total.toFixed(2).replace(".", ",")}`;
 }
 
 //Função que soma a quantidade dos produtos selecionados
 function somaQuantidade() {
-  let quantidade = document.getElementsByName("quantidade");
+  let quantidade = getFields().quantidade;
 
   quantidade[0].value = pedidos.length;
 }

@@ -87,22 +87,36 @@
 
   <!-- Chamada da função de calculo do Frete -->
   <script type="module">
-    let frete = document.getElementsByName("frete");
-    let tempoEntrega = document.getElementsByName("tempoEntrega");
+    let frete = getFields().frete;
+    let tempoEntrega = getFields().tempoEntrega;
+    let cepDistance;
 
     // TODO: Arrumar os CEP's para ficar dinamico com o cadastro
     let cepOrigem = "86082120";
-    let cepDestino = "86082809";
+    let cepDestino = "86026140";
 
     //Ativar loading do campo
     frete[0].value = "Carregando...";
     tempoEntrega[0].value = "Carregando...";
 
-    let cepDistance = await getCepDistance(cepOrigem, cepDestino);
+    //Inicio da validação do CEP
+    try {
+
+      //Consulta e retorna da API de CEP
+      cepDistance = await getCepDistance(cepOrigem, cepDestino);
+
+      //Caso retorne erro da API
+      if (cepDistance.error) {
+        cepDistance = { error: "<p><strong>Comunicação com a API não efetuada</strong><br>O usuario deve possuir um endereço válido<p>" }
+      }
+
+    } catch (error) {
+      //Dispara um erro personlizado
+      cepDistance = { error: "<p><strong>Comunicação com a API não efetuada</strong><br>O usuário não possui endereço</p>" }
+    }
 
     //A função tira o loading e substitui os valores no próprio escopo
     calculaFrete(cepDistance);
-
     //A função tira o loading e substitui os valores no próprio escopo
     calculaTempoEntrega(cepDistance.distance);
   </script>
