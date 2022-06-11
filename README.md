@@ -5,7 +5,7 @@ Por se tratar de um projeto academico, só levaremos o JS em consideração. A p
 
 ### Foram utilizados os seguintes recursos:
 - HTML5
-- Bootstrap 5 e Materialize
+- Bootstrap 5
 - JS Vanilla
 
 ### Estrutura padrão do projeto:
