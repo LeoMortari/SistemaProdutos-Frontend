@@ -31,8 +31,12 @@ async function handleSubmit() {
     pedido = extractValues(pedido);
     pedido = ajustaObjetos(pedido);
 
-    let teste = await adicionaPedido(pedido);
-    console.log(teste);
+    //default: sucess = true, error = false;
+    let request = await adicionaPedido(pedido);
+
+    if (request.error) {
+      throw new Error("Não foi possivel conectar ao backend");
+    }
   } catch (error) {
     setInfoCep({ error: `Erro na API: ${error.message}` });
   }
