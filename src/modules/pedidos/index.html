@@ -13,6 +13,7 @@
   <!-- JavaScript link -->
   <script src="./script.js"></script>
   <script src="./api.js"></script>
+  <script src="./convert.js"></script>
 
   <!-- CSS link -->
   <link rel="stylesheet" href="./style.css" />
@@ -21,10 +22,7 @@
 </head>
 
 <body>
-  <div>
-    <!-- TODO: Refazer o logo do restaurante -->
-    <h3 class="display-6">Restaurante do Japa</h3>
-  </div>
+  <img src="../../assets/logo.png" alt="logomarca" id="logo" class="overflow-auto">
 
   <div class="container">
     <div id="border">
@@ -47,14 +45,14 @@
       <div class="row">
         <div class="col">
           <div class="input-group">
-            <span class="input-group-text" id="basic-addcon1">Quantidade:</span>
-            <input type="text" class="form-control" name="quantidade" />
+            <span class="input-group-text" id="basic-addcon1"><strong>Quantidade:</strong></span>
+            <input type="text" class="form-control" name="quantidade" disabled />
           </div>
         </div>
         <div class="col">
           <div class="input-group">
-            <span class="input-group-text" id="basic-addcon1">Valor:</span>
-            <input type="text" class="form-control" name="valor" />
+            <span class="input-group-text" id="basic-addcon1"><strong>Valor:</strong></span>
+            <input type="text" class="form-control" name="valor" disabled />
           </div>
         </div>
       </div>
@@ -62,16 +60,27 @@
       <div class="row">
         <div class="col-md-6">
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addcon1">Frete:</span>
-            <input type="text" class="form-control" name="frete" />
+            <span class="input-group-text" id="basic-addcon1"><strong>Frete:</strong></span>
+            <input type="text" class="form-control" name="frete" disabled />
           </div>
         </div>
 
         <div class="col-md-6">
           <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addcon1">Tempo de entrega estimada:</span>
-            <input type="text" class="form-control" name="tempoEntrega" />
+            <span class="input-group-text" id="basic-addcon1"><strong>Tempo de entrega estimada:</strong></span>
+            <input type="text" class="form-control" name="tempoEntrega" disabled />
           </div>
+        </div>
+
+        <div class="col mb-3">
+          <span class="input-group-text d-flex justify-content-center"
+            id="basic-addcon1"><strong>Observação</strong></span>
+          <textarea placeholder='Retirar cebola... Adicionar molho.... etc' class="form-control" id="observacao"
+            rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+          <button type="submit" class="col-6 btn btn-secondary mb-6" onclick="handleSubmit()">Realizar Pedido</button>
         </div>
       </div>
     </div>

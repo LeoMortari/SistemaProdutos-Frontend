@@ -3,7 +3,7 @@ var pedidos = [
   { name: "X-Tudo", value: 18.9 },
   { name: "X-Frango", value: 14.5 },
   { name: "X-Salada", value: 10.9 },
-  { name: "Misto quente", value: 10.9 },
+  { name: "Misto quente", value: 5.9 },
   { name: "Coca-Cola 2Lts", value: 8.7 },
 ];
 
@@ -18,8 +18,48 @@ function getFields() {
   obj["valor"] = document.getElementsByName("valor");
   obj["quantidade"] = document.getElementsByName("quantidade");
   obj["listGroup"] = document.getElementsByClassName("list-group");
+  obj["observacao"] = document.getElementById("observacao");
 
   return obj;
+}
+
+//Submit da tela
+async function handleSubmit() {
+  let pedido = getFields();
+
+  try {
+    pedido = extractValues(pedido);
+    pedido = ajustaObjetos(pedido);
+
+    let teste = await adicionaPedido(pedido);
+    console.log(teste);
+  } catch (error) {
+    setInfoCep({ error: `Erro na API: ${error.message}` });
+  }
+}
+
+function ajustaObjetos(obj) {
+  obj.valor = convertValor(obj.valor);
+  obj.quantidade = parseInt(obj.quantidade);
+  obj.frete = convertValor(obj.frete);
+  obj.tempoEntrega = parseInt(obj.tempoEntrega.split(" ")[0]);
+  return obj;
+}
+
+//Trata o objeto de valores
+function extractValues(obj) {
+  let values = {};
+  let divs = Object.entries(obj);
+
+  divs.map((item) => {
+    if (item[0] == "observacao") {
+      values[item[0]] = item[1].value;
+    } else if (item[1][0].value) {
+      values[item[0]] = item[1][0].value;
+    }
+  });
+
+  return values;
 }
 
 //Função que checa se as cidades são iguais
@@ -44,7 +84,7 @@ function setInfoCep(cityError) {
       `<div class="alert alert-danger d-flex justify-content-center" role="alert">${cityError.error}</div>`
     );
   } else {
-    //Atibuição do card de erro
+    //Atibuição do card de informação
     field[0].insertAdjacentHTML(
       "afterend",
       '<div class="alert alert-primary d-flex justify-content-center" role="alert">Localidade não atendida</div>'

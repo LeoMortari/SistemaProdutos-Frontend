@@ -7,4 +7,13 @@ body {
     background-color: #ebedeb;
     border: solid 1px #c3c9c5;
     border-style: double;
+    margin-top: 30px;
+
+  }
+
+  #logo {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    margin: 15px;
   }
