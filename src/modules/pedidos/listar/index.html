@@ -66,9 +66,7 @@
         generateData(data, userEmail);
 
         //Caso não tenha pedidos feitos anteriormente, renderiza uma mensagem de erro
-        if (ul.children.length > 0) {
-
-        } else {
+        if (!ul.children.length) {
             let li = document.createElement("li");
             name = `list-group-item d-flex justify-content-center mb-2`
             li.classList = name;
@@ -78,7 +76,7 @@
 
             li.innerHTML = "<strong>Não foi possível encontrar pedidos anteriores.</strong>"
             ul.appendChild(li);
-        }
+        } 
     </script>
 
 </body>
