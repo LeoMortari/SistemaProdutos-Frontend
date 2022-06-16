@@ -27,9 +27,22 @@ function goListar() {
   location.href = "./listar/index.html";
 }
 
+function btnSubmit(submit) {
+  let btn = document.getElementById("btnSubmit");
+
+  if (submit) {
+    btn.disabled = true;
+    btn.textContent = "Carregando...";
+  } else {
+    btn.disabled = false;
+    btn.textContent = "Realizar Pedido";
+  }
+}
 //Submit da tela
 async function handleSubmit() {
   let pedido = getFields();
+
+  btnSubmit(true);
 
   try {
     pedido = extractValues(pedido);
@@ -38,11 +51,18 @@ async function handleSubmit() {
     //default: sucess = true, error = false;
     let request = await adicionaPedido(pedido);
 
-    if (request.error) {
+    if (!request) {
       throw new Error("Não foi possivel conectar ao backend");
+    } else if (request.error) {
+      throw new Error("Houve um erro de comunicação");
     }
+
+    //TODO: alterar a rota a próxima tela
+    location.href = "../../index.html";
   } catch (error) {
-    setInfoCep({ error: `Erro na API: ${error.message}` });
+    setInfoCep({ error: `Houve um erro: ${error.message}` });
+  } finally {
+    btnSubmit(false);
   }
 }
 
