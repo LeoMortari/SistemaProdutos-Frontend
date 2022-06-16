@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+    <!-- JavaScript Link -->
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <title>Pedido - Listar</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="border">
+            <div class="d-flex justify-content-center mb-3">
+                <h2>Histórico de pedidos</h2>
+            </div>
+
+            <div class="row">
+                <div class="col m-3">
+
+                    <ul class="list-group" id="list-group"></ul>
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button class="col-6 btn btn-dark mb-6" onclick="handleBack()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        //Gera um Loading...
+        var ul = document.getElementById("list-group");
+
+        var name = `list-group-item d-flex justify-content-center mb-2`;
+
+        let li = document.createElement("li");
+        li.classList = name;
+
+        li.innerHTML = "Carregando..."
+        ul.appendChild(li);
+
+        var userEmail = getSessionName("userEmail");
+
+        //Get todos os pedidos
+        const getPedidos = async () => (await getHistoricoPedidos(userEmail))
+
+        let data = await getPedidos(userEmail);
+
+        //Encerra o Loading...
+        ul.removeChild(li)
+
+        //Gera os cards de cada pedido feito
+        generateData(data, userEmail);
+
+        //Caso não tenha pedidos feitos anteriormente, renderiza uma mensagem de erro
+        if (ul.children.length > 0) {
+
+        } else {
+            let li = document.createElement("li");
+            name = `list-group-item d-flex justify-content-center mb-2`
+            li.classList = name;
+            li.style.backgroundColor = '#ff2a00'
+            li.style.opacity = '80%'
+            li.style.color = 'white'
+
+            li.innerHTML = "<strong>Não foi possível encontrar pedidos anteriores.</strong>"
+            ul.appendChild(li);
+        }
+    </script>
+
+</body>
+
+</html>

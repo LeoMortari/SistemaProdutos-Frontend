@@ -23,6 +23,10 @@ function getFields() {
   return obj;
 }
 
+function goListar() {
+  location.href = "./listar/index.html";
+}
+
 //Submit da tela
 async function handleSubmit() {
   let pedido = getFields();
