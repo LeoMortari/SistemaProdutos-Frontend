@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Sistema Finaceiro</title>
+
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+</head>
+
+
+<h1>Controle Financeiro</h1>
+
+
+
+<label for="User">Nome do Produto</label>
+<input type="text" id="name" name="name" />
+
+<br>
+<br>
+
+<label for="User">Valor De Venda</label>
+<input type="number" id="Valor_Venda" name="Valor_Venda" />
+
+<br>
+<br>
+
+<label for="User">Valor Do Pedido</label>
+<input type="number" id="Valor_Pedido" name="Valor_Pedido" />
+
+<br>
+<br>
+
+<h2>Lucro atual</h2>
+<p id="Valor_Lucro">
+
+</p>
+
+<button  type="submit" onclick="adicionahandlefinan()"> Enviar</button>
+
+<button type="submit" onclick="calcularaLucro()">Mostra O Lucro</button>
+
+
+
+
+
+</body>
+</html>
