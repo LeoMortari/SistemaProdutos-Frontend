@@ -1,10 +1,11 @@
 // Variável usada somente para teste, enquanto as demais API's não estão feitas
 var pedidos = [
-  { name: "X-Tudo", value: 18.9 },
-  { name: "X-Frango", value: 14.5 },
-  { name: "X-Salada", value: 10.9 },
-  { name: "Misto quente", value: 5.9 },
-  { name: "Coca-Cola 2Lts", value: 8.7 },
+  { id: 1, name: "X-Tudo", value: 18.9 },
+  { id: 2, name: "X-Frango", value: 14.5 },
+  { id: 3, name: "X-Salada", value: 10.9 },
+  { id: 4, name: "Misto quente", value: 5.9 },
+  { id: 5, name: "Coca-Cola 2Lts", value: 8.7 },
+  { id: 6, name: "Bom-Bom", value: 1.2 },
 ];
 
 //Função que captura todos os fields
@@ -41,6 +42,7 @@ function btnSubmit(submit) {
 //Submit da tela
 async function handleSubmit() {
   let pedido = getFields();
+  let produtos = pedidos.map((item) => String(item.id)).join(",");
 
   btnSubmit(true);
 
@@ -49,16 +51,16 @@ async function handleSubmit() {
     pedido = ajustaObjetos(pedido);
 
     //default: sucess = true, error = false;
-    let request = await adicionaPedido(pedido);
+    let request = await adicionaPedido({ ...pedido, produtos });
 
     if (!request) {
-      throw new Error("Não foi possivel conectar ao backend");
+      throw new Error("Não foi possivel conectar ao servidor");
     } else if (request.error) {
-      throw new Error("Houve um erro de comunicação");
+      throw new Error("Houve um erro");
+    } else {
+      //TODO: alterar a rota a próxima tela
+      location.href = "../../index.html";
     }
-
-    //TODO: alterar a rota a próxima tela
-    location.href = "../../index.html";
   } catch (error) {
     setInfoCep({ error: `Houve um erro: ${error.message}` });
   } finally {

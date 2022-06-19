@@ -14,6 +14,7 @@ async function adicionaPedido(pedido) {
 
   //Criando o Body
   var urlencoded = new URLSearchParams();
+  urlencoded.append("produtos", pedido.produtos);
   urlencoded.append("quantidade", pedido.quantidade);
   urlencoded.append("tempoEntrega", pedido.tempoEntrega);
   urlencoded.append("frete", pedido.frete);
