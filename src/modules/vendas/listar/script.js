@@ -7,6 +7,12 @@ const getVendas = async () => (await getHistoricoVendas())
 
 // lista todos as vendas
 const historicoVenda = async (userId) => {
+
+    if(userId.length == 0){
+        window.alert("Nenhuma venda encontrada")
+        location.href = 'index.html';
+    }
+
     for (i = 0; i < userId.length; i++) {
         let data = new Date(userId[i].data)
         let formatData = data.getHours() + ":"
