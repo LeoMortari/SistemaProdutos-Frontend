@@ -27,7 +27,7 @@ const historicoVenda = async (userId) => {
 };
 // vai para a pagina buscar por id
 function editarVenda(){
-    location.href = '../editar/editarVenda.html'
+    location.href = '../editar/index.html'
 }
 
 
