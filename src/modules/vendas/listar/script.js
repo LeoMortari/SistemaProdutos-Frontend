@@ -7,6 +7,12 @@ const getVendas = async () => (await getHistoricoVendas())
 
 // lista todos as vendas
 const historicoVenda = async (userId) => {
+
+    if(userId.length == 0){
+        window.alert("Nenhuma venda encontrada")
+        location.href = 'index.html';
+    }
+
     for (i = 0; i < userId.length; i++) {
         await sleep(100)
         let linha = `<tr onclick="paginaEditar(${userId[i].id_venda_pk})">
@@ -21,7 +27,7 @@ const historicoVenda = async (userId) => {
 };
 // vai para a pagina buscar por id
 function editarVenda(){
-    location.href = '../editar/editarVenda.html'
+    location.href = '../editar/index.html'
 }
 
 
