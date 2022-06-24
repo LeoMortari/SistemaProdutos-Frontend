@@ -15,7 +15,7 @@ const historicoVenda = async (userId) => {
 
     for (i = 0; i < userId.length; i++) {
         await sleep(100)
-        let linha = `<tr onclick="paginaEditar(${userId[i].id_venda_pk})">
+        let linha = `<tr>
             <td id="id${i}" value="${userId[i].id_venda_pk}">${userId[i].id_venda_pk}</td>
             <td>${userId[i].data}</td>
             <td>${userId[i].vendedor}</td>   
@@ -25,10 +25,12 @@ const historicoVenda = async (userId) => {
         document.getElementById('tabBody').innerHTML += linha;
     }
 };
-// vai para a pagina buscar por id
-function editarVenda(){
-    location.href = '../editar/index.html'
+// vai para a pagina menu
+function voltarIndex() {
+    location.href = '../index.html'
 }
+
+
 
 
 

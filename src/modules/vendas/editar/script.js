@@ -6,22 +6,25 @@ function buscaVendaId() {
 }
 
 //cria select
- async function criarselect(obj){ 
+async function criarselect(obj) {
     let id = document.getElementById('buscar').value;
-    
-    for( i = 0; i < obj.length ;i++){
-        let opcao;
-        console.log(obj[i].vendedor);
-        if(id == obj[i].id_usuario_pk){
-          opcao = `<option value="${obj[i].id_usuario_pk}" selected>${obj[i].vendedor}</option>`;
-          document.getElementById('selecionar').innerHTML += opcao;
-        }else{
-          opcao = `<option value="${obj[i].id_usuario_pk}">${obj[i].vendedor}</option>`;
-          document.getElementById('selecionar').innerHTML += opcao;
+
+    for (i = 0; i < obj.length; i++) {
+        let opcao = `<option value="${obj[i].id_usuario_pk}">${obj[i].nome}</option>`;
+            document.getElementById('selecionar1').innerHTML += opcao;
         }
-        
+
     }
-}
+
+
+async function criarselectPedido(obj) {
+    for (i = 0; i < obj.length; i++){
+           let opcao = `<option>${obj[i].id_pk}</option>`;;
+            document.getElementById('selecionar2').innerHTML += opcao;
+        }
+
+    }
+
 
 //lista venda por id
 const vendaId = async (userId) => {
@@ -33,7 +36,7 @@ const vendaId = async (userId) => {
                     <thead class="thead" id="titulotab">
                         <tr scope="row">
                             <th colspan="1">ID</th>
-                            <th colspan="1">ID VENDEDOR</th>
+                            <th colspan="1">NOME VENDEDOR</th>
                             <th colspan="1">ID PEDIDO</th>
                         </tr>
                     </thead>
@@ -43,18 +46,17 @@ const vendaId = async (userId) => {
 
     let linha1 = `<tr class="cursor">
                 <td class="idVenda">${userId[0].id_venda_pk}</td>
-                <td><select id="selecionar"></select></td>
-                <td><input class="inputEditar" type="number" id="pedidoId"></td>
+                <td><select id="selecionar1"><option value="${userId[0].id_usuario_pk}" selected> ${userId[0].vendedor}</option></select></td>
+                <td><select id="selecionar2"><option selected> ${userId[0].id_pk}</option></select></td>
+
                 </tr>`;
     let botaoEnviar = `<button type="button" class="btn btn-success" onclick="voltarIndex()">voltar</button>
     <button id="enviar" type="submit" class="btn btn-success" onclick="editar()">Enviar</button>`
     document.getElementById('tabela').innerHTML = table;
     document.getElementById('tabBody').innerHTML = linha1;
     getNomeVendedor()
-    document.getElementById('pedidoId').value = userId[0].id_pedido_fk;
+    getIdPedido()
     document.getElementById('botao').innerHTML = botaoEnviar;
-    
-
 }
 
 //Função que captura todos os fields
@@ -63,8 +65,8 @@ function getFields() {
 
     //Criação do objeto com todas as propriedades dos campos
     obj["id_venda_pk"] = document.getElementById('buscar').value;
-    obj["id_usuario_fk"] = document.getElementById("selecionar").value;
-    obj["id_pedido_fk"] = document.getElementById("pedidoId").value;
+    obj["id_usuario_fk"] = document.getElementById("selecionar1").value;
+    obj["id_pedido_fk"] = document.getElementById("selecionar2").value;
 
     console.log(obj)
     return obj;
@@ -73,18 +75,18 @@ function getFields() {
 async function editar() {
     let venda = getFields();
 
-        venda = ajustaObjetos(venda);
+    venda = ajustaObjetos(venda);
 
-        //default: sucess = true, error = false;
-        let request = await patchVendas(venda);
+    //default: sucess = true, error = false;
+    let request = await patchVendas(venda);
 
-        if (!request) {
-            throw new Error("Não foi possivel conectar ao backend");
-        } else if (request.error) {
-            throw new Error("Houve um erro de comunicação");
-        }
-        //TODO: alterar a rota a próxima tela
-        location.href = "../../index.html";
+    if (!request) {
+        throw new Error("Não foi possivel conectar ao backend");
+    } else if (request.error) {
+        throw new Error("Houve um erro de comunicação");
+    }
+    //TODO: alterar a rota a próxima tela
+    location.href = '../index.html'
 
 }
 
@@ -97,12 +99,12 @@ function ajustaObjetos(obj) {
 
 //volta para a pagina listagem geral
 function voltarIndex() {
-    location.href = '../listar/index.html'
+    location.href = '../index.html'
 }
 
-function bloquearEnviar(){
-    if(document.getElementById("enviar")){
+function bloquearEnviar() {
+    if (document.getElementById("enviar")) {
         document.getElementById("enviar").disabled = true;
     }
-    
+
 }
