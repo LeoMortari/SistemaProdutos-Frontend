@@ -4,6 +4,14 @@ const getVendasId = async (id) => {
       .then((result) => vendaId(result))
       .catch((erro) => console.log("erro na request: " + erro))
   }
+
+  const getNomeVendedor = async () => {
+    fetch(`http://localhost:3000/vendas`)
+      .then((response) => response.json())
+      .then((result) => criarselect(result))
+      .catch((erro) => console.log("erro na request: " + erro))
+}
+
   
   const patchVendas = async (venda) => {
     //Criando o Header

@@ -5,6 +5,24 @@ function buscaVendaId() {
     getId(valor)
 }
 
+//cria select
+ async function criarselect(obj){ 
+    let id = document.getElementById('buscar').value;
+    
+    for( i = 0; i < obj.length ;i++){
+        let opcao;
+        console.log(obj[i].vendedor);
+        if(id == obj[i].id_usuario_pk){
+          opcao = `<option value="${obj[i].id_usuario_pk}" selected>${obj[i].vendedor}</option>`;
+          document.getElementById('selecionar').innerHTML += opcao;
+        }else{
+          opcao = `<option value="${obj[i].id_usuario_pk}">${obj[i].vendedor}</option>`;
+          document.getElementById('selecionar').innerHTML += opcao;
+        }
+        
+    }
+}
+
 //lista venda por id
 const vendaId = async (userId) => {
     if (userId[0] == null) {
@@ -25,18 +43,17 @@ const vendaId = async (userId) => {
 
     let linha1 = `<tr class="cursor">
                 <td class="idVenda">${userId[0].id_venda_pk}</td>
-                <td><input class="inputEditar" type="number" id="usuarioId"></td>
+                <td><select id="selecionar"></select></td>
                 <td><input class="inputEditar" type="number" id="pedidoId"></td>
                 </tr>`;
-
     let botaoEnviar = `<button type="button" class="btn btn-success" onclick="voltarIndex()">voltar</button>
     <button id="enviar" type="submit" class="btn btn-success" onclick="editar()">Enviar</button>`
     document.getElementById('tabela').innerHTML = table;
     document.getElementById('tabBody').innerHTML = linha1;
-    document.getElementById('usuarioId').value = userId[0].id_usuario_fk;
+    getNomeVendedor()
     document.getElementById('pedidoId').value = userId[0].id_pedido_fk;
     document.getElementById('botao').innerHTML = botaoEnviar;
-
+    
 
 }
 
@@ -46,9 +63,10 @@ function getFields() {
 
     //Criação do objeto com todas as propriedades dos campos
     obj["id_venda_pk"] = document.getElementById('buscar').value;
-    obj["id_usuario_fk"] = document.getElementById("usuarioId").value;
+    obj["id_usuario_fk"] = document.getElementById("selecionar").value;
     obj["id_pedido_fk"] = document.getElementById("pedidoId").value;
 
+    console.log(obj)
     return obj;
 }
 
