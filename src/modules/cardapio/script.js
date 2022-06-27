@@ -1,15 +1,13 @@
 const modal = document.querySelector('.modal-container');
 const tbody = document.querySelector('tbody');
-const sId = document.querySelector('m-id');
+const sId = document.querySelector('#m-id');
 const sNome = document.querySelector('#m-nome');
 const sDescricao = document.querySelector('#m-descricao');
 const sPreco = document.querySelector('#m-preco');
 const btnSalvar = document.querySelector('#btnSalvar');
 
-let itens;
-let id;
 
-function openModal(edit = false, index = 0) {
+async function openModal(edit = false, index) {
   modal.classList.add('active')
 
   modal.onclick = e => {
@@ -19,80 +17,39 @@ function openModal(edit = false, index = 0) {
   }
 
   if (edit) {
-    sNome.value = itens[index].nome
-    sDescricao.value = itens[index].descricao
-    sPreco.value = itens[index].preco
-    id = index
-  } else {
-    sNome.value = ''
-    sDescricao.value = ''
-    sPreco.value = ''
+
+    const cardapio = async () => (await listarCardapioId(index))
+    let lista = await cardapio(index)
+      lista.forEach(item => {
+        sId.value = item.id_pk
+        sNome.value = item.nome
+        sDescricao.value = item.descricao
+        sPreco.value = item.preco
+      })
   }
 
 }
 
 function editItem(index) {
-
   openModal(true, index)
 }
 
-// function deleteItem(index) {
-//   itens.splice(index, 1)
-//   setItensBD()
-//   loadItens()
-// }
-
-
-
-// btnSalvar.onclick = e => {
-
-//   if (sNome.value == '' || sDescricao.value == '' || sPreco.value == '') {
-//     return
-//   }
-
-//   e.preventDefault();
-
-//   if (id !== undefined) {
-
-//     itens[id].nome = sNome.value
-//     itens[id].descricao = sDescricao.value
-//     itens[id].preco = sPreco.value
-//   } else {
-//     itens.push({'nome': sNome.value, 'descricao': sDescricao.value, 'preco': sPreco.value})
-//   }
-
-//   setItensBD()
-
-//   modal.classList.remove('active')
-//   loadItens()
-
-// }
-
-// function loadItens() {
-//   itens = getItensBD()
-//   tbody.innerHTML = ''
-//   itens.forEach((item, index) => {
-//     insertItem(item, index)
-//   })
-
-// }
-
-// const getItensBD = () => JSON.parse(localStorage.getItem('dbfunc')) ?? []
-// const setItensBD = () => localStorage.setItem('dbfunc', JSON.stringify(itens))
-
-// loadItens()
-
+//captura e envia os dados do input para a api
 async function handleSubmit() {
-
+  let id_pk = document.getElementById("m-id").value;
   let obj = {};
+  // se o id existir, ele irá editar o cardapio, e se não existir, iá cadastrar os dados no cardapio
+  if(id_pk != '' && id_pk!= null){
+    obj["id_pk"] = id_pk
+    console.log("passou id: ", obj.id_pk)
   obj["descricao"] = document.getElementById("m-descricao").value;
   obj["nome"] = document.getElementById("m-nome").value
   obj["preco"] = document.getElementById("m-preco").value;
-
-
-
-  console.log("dentro do handle: ", typeof obj.preco)
-  //default: sucess = true, error = false;
+  }else{
+  obj["descricao"] = document.getElementById("m-descricao").value;
+  obj["nome"] = document.getElementById("m-nome").value
+  obj["preco"] = document.getElementById("m-preco").value;
+  }
 
   await adicionaCardapio(obj);
 
@@ -100,14 +57,13 @@ async function handleSubmit() {
 
 }
 
+//lista o cardapio
 async function getListar() {
   lista = await listarCardapio();
-  
-  console.log(typeof lista)
 
   lista.map((item) => {
     let tr = document.createElement('tr')
-  tr.innerHTML = `
+    tr.innerHTML = `
       <td>${item.id_pk}</td>
       <td>${item.nome}</td>
       <td>${item.descricao}</td>
@@ -119,8 +75,8 @@ async function getListar() {
         <button onclick="deleteItem(${item.id_pk})"><i class='bx bx-trash'></i></button>
       </td>
     `
-  tbody.appendChild(tr)
-})
+    tbody.appendChild(tr)
+  })
 }
 
 
