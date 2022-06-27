@@ -35,8 +35,8 @@ const vendaId = async () => {
                 <td><select id="selecionar1"></select></td>
                 <td><select id="selecionar2"></select></td>
                 </tr>`;
-    let botaoEnviar = `<button type="button" class="btn btn-success" onclick="voltarIndex()">voltar</button>
-    <button id="enviar" type="submit" class="btn btn-success" onclick="cadastrar()">Enviar</button>`
+    let botaoEnviar = `<button type="button" class="btn btn-secondary" onclick="voltarIndex()">voltar</button>
+    <button id="enviar" type="submit" class="btn btn-secondary" onclick="cadastrar()">Enviar</button>`
     document.getElementById('tabela').innerHTML = table;
     document.getElementById('tabBody').innerHTML = linha1;
     getNomeVendedor()
