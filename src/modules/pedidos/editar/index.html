@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+
+    <!-- JavaScript link -->
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="./style.css" />
+
+    <title>Editar pedido</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="border">
+            <div class="d-flex justify-content-center mb-3">
+                <h2>Editar pedido:</h2>
+            </div>
+
+            <div class="row">
+                <div class="col mb-3">
+                    <ul class="list-group">
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center mb-1">
+                    <button type="submit" class="col-6 btn btn-danger mb-6" onclick="goBack()">Cancelar</button>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <button class="col-6 btn btn-success mb-6" id='btnSubmit' onclick="handleSubmit()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        generateData()
+    </script>
+</body>
+
+</html>

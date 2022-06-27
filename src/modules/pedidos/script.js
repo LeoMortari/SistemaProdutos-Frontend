@@ -1,12 +1,15 @@
 // Variável usada somente para teste, enquanto as demais API's não estão feitas
-var pedidos = [
-  { id: 1, name: "X-Tudo", value: 18.9 },
-  { id: 2, name: "X-Frango", value: 14.5 },
-  { id: 3, name: "X-Salada", value: 10.9 },
-  { id: 4, name: "Misto quente", value: 5.9 },
-  { id: 5, name: "Coca-Cola 2Lts", value: 8.7 },
-  { id: 6, name: "Bom-Bom", value: 1.2 },
-];
+var newPedidos = sessionStorage.getItem("newPedidos");
+var pedidos = newPedidos
+  ? JSON.parse(newPedidos)
+  : [
+      { id: 1, name: "X-Tudo", value: 18.9, quantidade: 1 },
+      { id: 2, name: "X-Frango", value: 14.5, quantidade: 2 },
+      { id: 3, name: "X-Salada", value: 10.9, quantidade: 1 },
+      { id: 4, name: "Misto quente", value: 5.9, quantidade: 2 },
+      { id: 5, name: "Coca-Cola 2Lts", value: 8.7, quantidade: 1 },
+      { id: 6, name: "Bom-Bom", value: 1.2, quantidade: 1 },
+    ];
 
 //Função que captura todos os fields
 function getFields() {
@@ -28,6 +31,29 @@ function goListar() {
   location.href = "./listar/index.html";
 }
 
+async function goEditar() {
+  sessionStorage.setItem("pedido", JSON.stringify(pedidos));
+
+  let pedido = getFields();
+  let produtos = pedidos.map((item) => String(item.id)).join(",");
+
+  try {
+    pedido = extractValues(pedido);
+    pedido = ajustaObjetos(pedido);
+
+    let request = await adicionaPedido({ ...pedido, produtos });
+    console.log(request);
+
+    if (!JSON.parse(request).sucess) {
+      throw new Error("Sem acesso ao banco de dados");
+    }
+
+    location.href = "./editar/index.html";
+  } catch (error) {
+    setInfoCep({ error: `Houve um erro: ${error.message}` });
+  }
+}
+
 function btnSubmit(submit) {
   let btn = document.getElementById("btnSubmit");
 
@@ -39,6 +65,7 @@ function btnSubmit(submit) {
     btn.textContent = "Realizar Pedido";
   }
 }
+
 //Submit da tela
 async function handleSubmit() {
   let pedido = getFields();
@@ -167,7 +194,7 @@ function listaPedidos() {
     let li = document.createElement("li");
     li.classList = name;
 
-    li.innerHTML = pedido.name;
+    li.innerHTML = pedido.name + "  x" + pedido.quantidade;
 
     ul[0].appendChild(li);
   });
@@ -178,7 +205,7 @@ function somaValor() {
   let total = 0;
 
   //Iteração do valor dos pedidos
-  pedidos.map((pedido) => (total += pedido.value));
+  pedidos.map((pedido) => (total += pedido.value * pedido.quantidade));
 
   let valor = getFields().valor;
 
