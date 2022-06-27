@@ -22,18 +22,29 @@
             <table class="table table-bordered table-hover" id="menu">
                 <tbody >
                     <tr>
-                        <td class="opcao"><a href="cadastrar/index.html">Cadastrar</a></td>
+                        <td class="opcao" onclick="telaCadastrar()">Cadastrar</td>
                     </tr>
                     <tr>
-                        <td class="opcao"><a href="listar/index.html">Listar</a></td>
+                        <td class="opcao"  onclick="telaListar()">Listar</td>
                     </tr>
                     <tr>
-                        <td class="opcao"><a href="editar/index.html">Editar</a></td>
+                        <td class="opcao"  onclick="telaEditar()">Editar</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <script>
+        function telaCadastrar(){
+            location.href = "cadastrar/index.html"
+        }
+        function telaListar(){
+            location.href = "listar/index.html"
+        }
+        function telaEditar(){
+            location.href = "editar/index.html"
+        }
+    </script>
 </body>
 
 </html>

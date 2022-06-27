@@ -2,7 +2,7 @@
 function buscaVendaId() {
     let valor = document.getElementById('buscar').value;
     const getId = async () => (await getVendasId(valor))
-    getId(valor)
+    valor == null || valor =='' ? window.alert("Espaço em branco") : getId(valor);
 }
 
 //cria select
