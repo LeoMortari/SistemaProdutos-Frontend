@@ -51,7 +51,7 @@ const teste = async () => {
   let total = 0;
   for (let i = 0; i < prod.length; i++) {
     for (let j = 0; j < historico.length; j++) {
-      if (prod[i] == historico[j].produto) {
+      if (prod[i] == historico[j].descricao) {
         total += historico[j].valor;
       }
     }
