@@ -10,7 +10,7 @@ const historicoVenda = async (userId) => {
 
     if(userId.length == 0){
         window.alert("Nenhuma venda encontrada")
-        location.href = 'index.html';
+        location.href = '../index.html';
     }
 
     for (i = 0; i < userId.length; i++) {
