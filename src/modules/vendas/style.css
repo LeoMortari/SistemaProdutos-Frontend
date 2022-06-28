@@ -1,0 +1,42 @@
+body{
+    background-color: #f0f0f0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+tr{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-justify: auto;
+}
+
+thead{
+    font-size: 18px;
+    color: white;
+    background-color:  black;
+}
+
+tr.cursor:hover{
+    cursor: pointer;
+}
+
+.inputEditar{
+    text-align: center;
+    width: 50px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: black;
+
+}
+ #menu{
+    font-size: 40px;
+    background-color: #c7c4c4;
+    border: solid black 1px;
+    cursor: pointer;
+ }
