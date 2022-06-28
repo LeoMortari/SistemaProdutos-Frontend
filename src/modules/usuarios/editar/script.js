@@ -18,7 +18,7 @@
         let table = `<table id="tabela_usuario" class="table table-hover">
                         <thead class="thead" id="titulotab">
                             <tr scope="row">
-                                <th colspan="1"></th>
+                                <th colspan="1">ID</th>
                                 <th colspan="1">CAMPO</th>
                              
                             </tr>
