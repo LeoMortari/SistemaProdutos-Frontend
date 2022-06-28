@@ -90,6 +90,8 @@ async function listaFinanceiroId(id) {
     document.getElementById("pedido").value = lista.ValorPedido;
     document.getElementById("lucro").value = lista.ValorLucro;
     document.getElementById("lucro").disabled = true;
+    let botao = `<button class="btn btn-success" type="submit" onclick="editar()">Confirmar</button>`
+    document.getElementById("confirmarEditar").innerHTML = botao;
   });
 }
 //edita os dados ja cadastrados
