@@ -11,15 +11,9 @@ async function adicionahandlefinan() {
     ids.push(id)
 
   }
-  try {
-
-    //default: sucess = true, error = false;
-    let request = await adicionaFinanceiro(ids);
-
-
-  } catch (error) {
-    console.log(error)
-  }
+     await adicionaFinanceiro(ids);
+     location.href = "financeiross.html"
+     console.log("ir para outra pagina")
 }
 
 
