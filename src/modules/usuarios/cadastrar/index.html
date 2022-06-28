@@ -57,6 +57,19 @@
               }
             return true;
           }
+
+      function ConfirmarCPF(){
+      var cpf1 = document.getElementById("cpf").value;
+      if (cpf1.length != 11){
+          window.alert("CPF preenchido errado!! OBS. colocar apenas números")     
+          document.getElementById("cpf").value = null;    
+          return false;
+           }
+          return true;
+          }
+
+      
+      
       
   </script>
     <div>
@@ -83,7 +96,7 @@
       </div>
       <div class="col mb-2">
       <label class="form-label" for="cpf">CPF:</label>
-      <input class="form-control" type="text" id="cpf" pattern="[0-9]{11}" placeholder="Preencher... " required>
+      <input class="form-control" type="text" id="cpf" onblur="ConfirmarCPF()" placeholder="Preencher... " required>
       </div>
       <div class="col mb-2">
       <label class="form-label" for="email">E-mail:</label>
