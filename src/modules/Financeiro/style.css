@@ -1,0 +1,18 @@
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, Helvetica, sans-serif;
+
+  }
+
+thead{
+  background-color: black;
+  color: white;
+}
+
+table{
+  text-align: center;
+}
+
+input{
+  width: 33%;
+}

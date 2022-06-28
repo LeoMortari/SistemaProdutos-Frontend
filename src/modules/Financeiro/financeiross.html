@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema Finaceiro</title>
+
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="shadow-none p-3 mb-5 bg-light rounded">
+        <h1>Controle Financeiro</h1>
+    </div>
+
+
+    <div class="container">
+
+        <div class="input-group">
+            <input type="number" id="buscar" class="form-control" placeholder="Digite o id da venda">
+            <span id="buscar" class="input-group-addon">
+                <button class="btn btn-success" onclick="teste()" type="button">buscar</button>
+            </span>
+        </div>
+        <br>
+        <div class="row">
+            <table class="table" id="'table">
+                <thead>
+                    <tr>
+                        <th>ID VENDA</th>
+                        <th>VALOR VENDA</th>
+                        <th>VALOR DESPESA</th>
+                        <th>VALOR LUCRO</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela">
+
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <ul class="list-group"></ul>
+        <center id="bot">
+            
+        </center>
+        <br>
+        <center>
+            <form action="financeiroList.html">
+                <button class="btn btn-success" type="submit">Listar </button>
+            </form>
+        </center>
+
+    </div>
+
+
+
+</body>
+
+</html>
