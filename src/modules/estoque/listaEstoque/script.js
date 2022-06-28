@@ -37,12 +37,29 @@ function listaProdutosEstoque() {
     });
 }
 
+function listaProdutosEstoqueId() {
+    let id = document.getElementById("idProdutoEstoque").value
+    data = getListaEstoque("http://localhost:3000/estoque/listar/" + id);
+    
+    produtosNoEstoque = JSON.parse(data);
+    let tabela = document.getElementById("table")
+
+    produtosNoEstoque.forEach(element => {
+        let linha = criaLinha(element);
+        tabela.appendChild(linha);
+    });
+}
+
 function botaoCadastrar() {
     location.href = 'cadastrarProdutoEstoque/index.html'
 }
 
 function botaoDeletar() {
     location.href = './deletarProdutoDoEstoque/index.html'
+}
+
+function botaoEditar() {
+    location.href = './EditarEstoque/index.html'
 }
 
 listaProdutosEstoque()
