@@ -3,7 +3,7 @@
 
 
 
-//Submit da tela
+//Submit da tela e recarrega a pagina
 async function adicionahandlefinan() {
   let ids = new Array();
   for (i = 0; i < 4; i++) {
@@ -13,18 +13,8 @@ async function adicionahandlefinan() {
   }
      await adicionaFinanceiro(ids);
      location.href = "financeiross.html"
-     console.log("ir para outra pagina")
+
 }
-
-
-async function calcularaLucro() {
-  var ValorPedido = document.getElementById('Valor_Pedido').value;
-  var ValorVenda = document.getElementById('Valor_Venda').value;
-  document.getElementById('Valor_Lucro').innerHTML = ValorVenda - ValorPedido
-}
-
-
-
 
 const getProdutoVenda = async () => (await getProdutoEstoque())
 
@@ -34,7 +24,6 @@ const getprodutos = async (result) => {
   console.log(obj)
 };
 
-
 const teste = async () => {
   let valor = document.getElementById('buscar').value;
   let produtoVenda = await getVendasId(valor)
@@ -43,6 +32,8 @@ const teste = async () => {
   let produtoUnico = produtoVenda[0].produtos;
   let prod = produtoUnico.split(',');
   let total = 0;
+
+//soma o valor dos produtos do estoque apara calcular a despesa
   for (let i = 0; i < prod.length; i++) {
     for (let j = 0; j < historico.length; j++) {
       if (prod[i] == historico[j].descricao) {
@@ -62,7 +53,7 @@ const teste = async () => {
   document.getElementById("bot").innerHTML = bot
 }
 
-
+//lista todas as finanças
 async function teste2() {
   let table = document.getElementById('tabela');
   let result = await getListar();
@@ -82,6 +73,7 @@ async function teste2() {
     
   });
 }
+//lista a finança selecionada para edição
 async function listaFinanceiroId(id) {
   let result = await getFinanceiroId(id)
   result.map((lista) => {
@@ -106,13 +98,14 @@ async function listaFinanceiroId(id) {
 });
 
 }
-
+//edita os dados ja cadastrados
 async function editar() {
   let id = document.getElementById('id').value
   let venda = document.getElementById('venda').value
   let pedido = document.getElementById('pedido').value
   let lucro = document.getElementById('lucro').value
 
+  //guarda os valores dentro de um array/vetor
   let valor = new Array(id,venda,pedido,lucro)
   try {
     //default: sucess = true, error = false;
@@ -124,6 +117,7 @@ async function editar() {
   location.href = "./financeiross.html"
  
 }
+//calcula o lucro cd vez que o valor for mudado na edição
 function calcularLucro(){
   let venda = document.getElementById('venda').value;
   let pedido = document.getElementById('pedido').value;
