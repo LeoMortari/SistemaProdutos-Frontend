@@ -43,6 +43,7 @@
 
     } else {
       location.href = "../login/index.html";
+      window.alert(`Usuario cadastrado com sucesso!`)
     }
   } catch (error) {
     alert(`Houve um erro: ${error.message}` );
