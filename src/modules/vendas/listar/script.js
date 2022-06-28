@@ -9,8 +9,7 @@ const getVendas = async () => (await getHistoricoVendas())
 const historicoVenda = async (userId) => {
 
     if(userId.length == 0){
-        window.alert("Nenhuma venda encontrada")
-        location.href = '../index.html';
+       return window.alert("Nenhuma venda encontrada")
     }
 
     for (i = 0; i < userId.length; i++) {

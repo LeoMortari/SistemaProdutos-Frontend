@@ -1,23 +1,23 @@
 //pega o valor digitado no input buscar
 
 //cria select
- async function criarselect(obj){  
-    for( i = 0; i < obj.length ;i++){
+async function criarselect(obj) {
+    for (i = 0; i < obj.length; i++) {
         let opcao;
-          opcao = `<option value="${obj[i].id_usuario_pk}">${obj[i].nome}</option>`;
-          document.getElementById('selecionar1').innerHTML += opcao;
-        }
-        
+        opcao = `<option value="${obj[i].id_usuario_pk}">${obj[i].nome}</option>`;
+        document.getElementById('selecionar1').innerHTML += opcao;
     }
 
-async function criarselectPedido(obj){ 
-    for( i = 0; i < obj.length ;i++){
+}
+
+async function criarselectPedido(obj) {
+    for (i = 0; i < obj.length; i++) {
         let opcao;
-          opcao = `<option>${obj[i].id_pk}</option>`;
-          document.getElementById('selecionar2').innerHTML += opcao;
-        }
-        
+        opcao = `<option>${obj[i].id_pk}</option>`;
+        document.getElementById('selecionar2').innerHTML += opcao;
     }
+
+}
 
 const vendaId = async () => {
     let table = `<table id="tabela_venda" class="table table-hover">
@@ -35,8 +35,8 @@ const vendaId = async () => {
                 <td><select id="selecionar1"></select></td>
                 <td><select id="selecionar2"></select></td>
                 </tr>`;
-    let botaoEnviar = `<button type="button" class="btn btn-secondary" onclick="voltarIndex()">voltar</button>
-    <button id="enviar" type="submit" class="btn btn-secondary" onclick="cadastrar()">Enviar</button>`
+    let botaoEnviar = `<button id="enviar" type="submit" class="btn btn-secondary" onclick="cadastrar()">Enviar</button><br><br>
+                <button type="button" class="btn btn-dark" onclick="location.href='../listar/index.html'">voltar</button>`
     document.getElementById('tabela').innerHTML = table;
     document.getElementById('tabBody').innerHTML = linha1;
     getNomeVendedor()
@@ -59,17 +59,17 @@ function getFields() {
 async function cadastrar() {
     let venda = getFields();
 
-        venda = ajustaObjetos(venda);
+    venda = ajustaObjetos(venda);
 
-        //default: sucess = true, error = false;
-        let request = await cadastraVenda(venda);
-        if (!request) {
-            throw new Error("Não foi possivel conectar ao backend");
-        } else if (request.error) {
-            throw new Error("Houve um erro de comunicação");
-        }
-        //TODO: alterar a rota a próxima tela
-        location.href = "../index.html";
+    //default: sucess = true, error = false;
+    let request = await cadastraVenda(venda);
+    if (!request) {
+        throw new Error("Não foi possivel conectar ao backend");
+    } else if (request.error) {
+        throw new Error("Houve um erro de comunicação");
+    }
+    //TODO: alterar a rota a próxima tela
+    location.href = "../index.html";
 }
 
 function ajustaObjetos(obj) {
