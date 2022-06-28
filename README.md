@@ -4,7 +4,6 @@ Projeto academico voltado para a interação com o Back-end.
 Por se tratar de um projeto academico, só levaremos o JS em consideração. A parte do HTML e CSS são básicas.
 
 ### Foram utilizados os seguintes recursos:
-
 - HTML5
 - Bootstrap 5
 - JS Vanilla
