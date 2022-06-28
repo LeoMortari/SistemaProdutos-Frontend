@@ -48,7 +48,7 @@ const getProdutoEstoque = async () => (
 )
 
 const getVendasId = async (id) => (
-  fetch(`http://localhost:3000/vendas/${id}`)
+  fetch(`http://localhost:3000/vendas1/${id}`)
     .then((response) => response.json())
     .then((result) => result)
     .catch((erro) => console.log("erro na request: " + erro))
