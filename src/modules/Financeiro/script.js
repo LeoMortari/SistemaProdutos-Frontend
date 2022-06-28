@@ -20,16 +20,19 @@ const getProdutoVenda = async () => (await getProdutoEstoque())
 
 const getprodutos = async (result) => {
 
+  //envia o obj para a request
   let obj = getProdutoVenda()
   console.log(obj)
 };
 
+//busca a financa por id para cadastrar
 const teste = async () => {
   let valor = document.getElementById('buscar').value;
   let produtoVenda = await getVendasId(valor)
   let historico = await getProdutoVenda()
 
   let produtoUnico = produtoVenda[0].produtos;
+  //separa os produto a cada virgula
   let prod = produtoUnico.split(',');
   let total = 0;
 
