@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+    <title>Listar - Usuários</title>
+</head>
+
+<body>
+    <div>
+        <center><h3 class="display-6">Restaurante do Japa</h3>
+        <img class="img" src="../cadastrar/IMG/LogoResJapa2.png" ></center>
+      </div>
+      <div class="container">
+        <div id="border">
+        <h2>Lista de Usuários Cadastrados ao Banco</h2>
+    </div>      
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+        </div>
+        <br>
+            <table id="tabela_usuario" class="table">
+                <thead class="thead" id="titulotab">
+                    <tr scope="row">
+                        <th  colspan="1">ID</th>
+                        <th  colspan="1">NOME</th>
+                        <th  colspan="1">CPF</th>
+                        <th  colspan="1">EMAIL</th>
+                        <th  colspan="1">SENHA</th>
+                        <th  colspan="1">TELEFONE</th>
+                        <th  colspan="1">CEP</th>
+                        <th  colspan="1">LOGRADOURO</th>
+                        <th  colspan="1">BAIRRO</th>
+                        <th  colspan="1">NUMERO</th>
+                        <th  colspan="1">UF</th>
+                        <th  colspan="1">CIDADE</th>
+                        <th  colspan="1">IBGE</th>
+
+
+                    </tr>
+                </thead>
+                <tbody id="tabBody">
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <p>
+        <div >
+        <center><button class="div1" type="submit"  onclick="editarVenda()">Editar</button></center>   
+        <center><button  class="div1" type="submit" onclick="RetornaLogin()">Retornar ao Login</button></center>
+        </div>
+        </p>
+        <br>
+        
+        <br>
+        <br>
+        <script>
+        getUsuarios()
+        </script>
+    </body>
+</html>
