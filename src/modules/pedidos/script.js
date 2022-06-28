@@ -36,12 +36,13 @@ async function goEditar() {
 
   let pedido = getFields();
   let produtos = pedidos.map((item) => String(item.id)).join(",");
+  let email = sessionStorage.getItem("email");
 
   try {
     pedido = extractValues(pedido);
     pedido = ajustaObjetos(pedido);
 
-    let request = await adicionaPedido({ ...pedido, produtos });
+    let request = await adicionaPedido({ ...pedido, produtos, email });
     console.log(request);
 
     if (!JSON.parse(request).sucess) {
@@ -70,7 +71,7 @@ function btnSubmit(submit) {
 async function handleSubmit() {
   let pedido = getFields();
   let produtos = pedidos.map((item) => String(item.id)).join(",");
-
+  let email = sessionStorage.getItem("email");
   btnSubmit(true);
 
   try {
@@ -78,7 +79,7 @@ async function handleSubmit() {
     pedido = ajustaObjetos(pedido);
 
     //default: sucess = true, error = false;
-    let request = await adicionaPedido({ ...pedido, produtos });
+    let request = await adicionaPedido({ ...pedido, produtos, email });
 
     if (!request) {
       throw new Error("Não foi possivel conectar ao servidor");

@@ -20,6 +20,7 @@ async function adicionaPedido(pedido) {
   urlencoded.append("frete", pedido.frete);
   urlencoded.append("valor", pedido.valor);
   urlencoded.append("observacao", pedido.observacao);
+  urlencoded.append("email", pedido.email);
 
   //instanciando as opção da request
   var requestOptions = {

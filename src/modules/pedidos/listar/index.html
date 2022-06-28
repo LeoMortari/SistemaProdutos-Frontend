@@ -71,7 +71,7 @@
         li.innerHTML = "Carregando..."
         ul.appendChild(li);
 
-        var userEmail = getSessionName("email");
+        var userEmail = sessionStorage.getItem('email');
 
         const messageError = (message) => `<strong>${message}</strong>`;
 
