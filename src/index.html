@@ -11,8 +11,27 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
 
     <script>
-        function goTo() {
-            window.location.href = "modules/pedidos/index.html"
+        function goTo(path) {
+            switch (path) {
+                case 'pedido':
+                    window.location.href = "modules/pedidos/index.html";
+                    break;
+                case 'cardapio':
+                    window.location.href = "modules/cardapio/index.html";
+                    break;
+                case 'financeiro':
+                    window.location.href = "modules/Financeiro/financeiross.html";
+                    break;
+                case 'login':
+                    window.location.href = "modules/usuarios/login/index.html";
+                    break;
+                case 'estoque':
+                    break;
+                    window.location.href = "modules/estoque/index.html";
+                case 'vendas':
+                    window.location.href = "modules/vendas/index.html";
+                    break;
+            }
         }
     </script>
 
@@ -23,7 +42,19 @@
     <div class="container">
         <div class="row">
             <div class="m-5 border d-flex align-self-center justify-content-center">
-                <button type="button" onclick="goTo()" class="m-5 btn btn-primary col-6">Pedido</button>
+                <button type="button" onclick="goTo('pedido')" class="m-5 btn btn-primary col-6">Pedido</button>
+            </div>
+            <div class="m-5 border d-flex align-self-center justify-content-center">
+                <button type="button" onclick="goTo('cardapio')" class="m-5 btn btn-primary col-6">Cardapio</button>
+            </div>
+            <div class="m-5 border d-flex align-self-center justify-content-center">
+                <button type="button" onclick="goTo('vendas')" class="m-5 btn btn-primary col-6">Vendas</button>
+            </div>
+            <div class="m-5 border d-flex align-self-center justify-content-center">
+                <button type="button" onclick="goTo('login')" class="m-5 btn btn-primary col-6">Login</button>
+            </div>
+            <div class="m-5 border d-flex align-self-center justify-content-center">
+                <button type="button" onclick="goTo('financeiro')" class="m-5 btn btn-primary col-6">Financeiro</button>
             </div>
         </div>
     </div>
