@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+    <title>Editar - Usuário</title>
+    </head>
+    <body>
+        <div>
+        <center><h3 class="display-6">Restaurante do Japa</h3>
+        <img class="img" src="../cadastrar/IMG/LogoResJapa2.png" ></center>
+        </div>
+        <br>
+        <div class="container">
+        <div id="border">
+        <center><h2>Editar Usuários</h2></center>
+        </div>  
+        <div class="container">
+        <div class="input-group">
+            <input type="number" id="buscar" class="form-control" placeholder="Preencher o ID do Usuário para alterar" onchange="Enviar()">
+
+            <span id="buscar" class="input-group-addon">
+            <button class="div1" onclick="buscaUsuarioId()" type="button">buscar</button>
+            </span>
+        </div>
+        <br>
+        <div class="row" id="tabela">
+        </div>
+        </div>
+        <div class="row">
+        <center>
+        <p>
+        <div class="col-md-12" id="botao">
+        <button class="div1" style=" float: left" type="button"  onclick="voltarIndex()">voltar</button>
+        </p>
+        <br>
+        <br>
+        <br>
+        </div>
+        </center>
+         </div>
+    </body>
+</html>

@@ -1,116 +1,148 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Bootstrap link -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- JavaScript link -->
-    <script src="./script.js"></script>
-    <script src="./api.js"></script>
+  <!-- Bootstrap link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
 
-    <!-- CSS link -->
-    <link rel="stylesheet" href="./style.css" />
+  <!-- JavaScript link -->
+  <script src="./script.js"></script>
+  <script src="./api.js"></script>
+  <script src="./convert.js"></script>
 
-    <title>Pedido</title>
-  </head>
+  <!-- Set local data -->
+  <script>
+    // TODO: Refatorar para setar uma Session ao Logar
+    sessionStorage.setItem('userEmail', 'leo@teste');
+  </script>
 
-  <body>
-    <div>
-      <!-- TODO: Refazer o logo do restaurante -->
-      <h3 class="display-6">Restaurante do Japa</h3>
-    </div>
+  <!-- CSS link -->
+  <link rel="stylesheet" href="./style.css" />
 
-    <div class="container">
-      <div id="border">
-        <div class="d-flex justify-content-center mb-3">
-          <h2>Revise seu pedido:</h2>
-        </div>
+  <title>Pedido</title>
+</head>
 
-        <div class="row">
-          <div class="col mb-3">
-            <h6
-              class="display-6 text-secondary text-bg-light d-flex justify-content-center rounded border-bottom-0"
-            >
-              Itens Adicionados
-            </h6>
+<body>
 
-            <ul class="list-group"></ul>
+  <div class="container">
+    <div id="border">
+      <div class="d-flex justify-content-center mb-3">
+        <h2>Revise seu pedido:</h2>
+      </div>
+
+      <div class="row">
+        <div class="col mb-3">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addcon1">Itens adicionados:</span>
+            <input type="text" class="form-control" name="itens" disabled />
           </div>
+
+          <ul class="list-group"></ul>
+
+          <div class="row" name="infoFrete"></div>
         </div>
-        <div class="row">
-          <div class="col">
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addcon1"
-                >Quantidade:</span
-              >
-              <input type="text" class="form-control" name="quantidade" />
-            </div>
-          </div>
-          <div class="col">
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addcon1">Valor:</span>
-              <input type="text" class="form-control" name="valor" />
-            </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addcon1"><strong>Quantidade:</strong></span>
+            <input type="text" class="form-control" name="quantidade" disabled />
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addcon1">Frete:</span>
-              <input type="text" class="form-control" name="frete" />
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="basic-addcon1"
-                >Tempo de entrega estimada:</span
-              >
-              <input type="text" class="form-control" name="tempoEntrega" />
-            </div>
+        <div class="col">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addcon1"><strong>Valor:</strong></span>
+            <input type="text" class="form-control" name="valor" disabled />
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addcon1"><strong>Frete:</strong></span>
+            <input type="text" class="form-control" name="frete" disabled />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addcon1"><strong>Tempo de entrega estimada:</strong></span>
+            <input type="text" class="form-control" name="tempoEntrega" disabled />
+          </div>
+        </div>
+
+        <div class="col mb-3">
+          <span class="input-group-text d-flex justify-content-center"
+            id="basic-addcon1"><strong>Observação</strong></span>
+          <textarea placeholder='Retirar cebola... Adicionar molho.... etc' class="form-control" id="observacao"
+            rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-center mb-1">
+          <button type="submit" class="col-6 btn btn-warning mb-6" onclick="goEditar()" id="btnSubmit">Editar
+            pedido</button>
+        </div>
+
+        <div class="d-flex justify-content-center mb-1">
+          <button type="submit" class="col-6 btn btn-secondary mb-6" onclick="handleSubmit()" id="btnSubmit">Realizar
+            Pedido</button>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <button class="col-6 btn btn-dark mb-6" onclick="goListar()">Ver todos os pedidos</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Chamada da função de iniciação da página -->
-    <script>
-      calculaTempoEntrega();
-      listaPedidos();
-      somaValor();
-      somaQuantidade();
-    </script>
+  <!-- Chamada da função de iniciação da página -->
+  <script>
+    calculaTempoEntrega();
+    listaPedidos();
+    somaValor();
+    somaQuantidade();
+  </script>
 
-    <!-- Chamada da função de calculo do Frete -->
-    <script type="module">
-      let frete = document.getElementsByName("frete");
-      let tempoEntrega = document.getElementsByName("tempoEntrega");
+  <!-- Chamada da função de calculo do Frete -->
+  <script type="module">
+    let frete = getFields().frete;
+    let tempoEntrega = getFields().tempoEntrega;
+    let cepDistance;
 
-      // TODO: Arrumar os CEP's para ficar dinamico com o cadastro
-      let cepOrigem = "86082120";
-      let cepDestino = "86087636";
+    // TODO: Arrumar os CEP's para ficar dinamico com o cadastro
+    let cepOrigem = "86082120";
+    let cepDestino = "86026140";
 
-      //Ativar loading do campo
-      frete[0].value = "Carregando...";
-      tempoEntrega[0].value = "Carregando...";
+    //Ativar loading do campo
+    frete[0].value = "Carregando...";
+    tempoEntrega[0].value = "Carregando...";
 
-      let cepDistance = await getCepDistance(cepOrigem, cepDestino);
+    //Inicio da validação do CEP
+    try {
 
-      //A função tira o loading e substitui os valores no próprio escopo
-      calculaFrete(cepDistance.distance);
+      //Consulta e retorna da API de CEP
+      cepDistance = await getCepDistance(cepOrigem, cepDestino);
 
-      //A função tira o loading e substitui os valores no próprio escopo
-      calculaTempoEntrega(cepDistance.distance);
-    </script>
-  </body>
+      //Caso retorne erro da API
+      if (cepDistance.error) {
+        cepDistance = { error: "<p><strong>Comunicação com a API não efetuada</strong><br>O usuario deve possuir um endereço válido<p>" }
+      }
+
+    } catch (error) {
+      //Dispara um erro personlizado
+      cepDistance = { error: "<p><strong>Comunicação com a API não efetuada</strong><br>O usuário não possui endereço</p>" }
+    }
+
+    //A função tira o loading e substitui os valores no próprio escopo
+    calculaFrete(cepDistance);
+    //A função tira o loading e substitui os valores no próprio escopo
+    calculaTempoEntrega(cepDistance.distance);
+  </script>
+</body>
+
 </html>

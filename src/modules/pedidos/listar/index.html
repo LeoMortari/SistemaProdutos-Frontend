@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- JavaScript Link -->
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="../style.css" />
+
+    <title>Pedido - Listar</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="border">
+            <div class="d-flex justify-content-center mb-3">
+                <h2>Histórico de pedidos</h2>
+            </div>
+
+            <div class="row">
+                <div class="col m-3">
+
+                    <ul class="list-group" id="list-group"></ul>
+
+
+
+                    <div class="accordion" id="accordion">
+                    </div>
+
+
+
+
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+                <button class="col-6 btn btn-dark mb-6" onclick="handleBack()">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        //Gera um Loading...
+        var ul = document.getElementById("list-group");
+        var accordion = document.getElementById("accordion");
+
+
+        var name = `list-group-item d-flex justify-content-center mb-2`;
+
+        let li = document.createElement("li");
+        li.classList = name;
+
+        li.innerHTML = "Carregando..."
+        ul.appendChild(li);
+
+        var userEmail = getSessionName("userEmail");
+
+        const messageError = (message) => `<strong>${message}</strong>`;
+
+        let data;
+
+        try {
+            //Get todos os pedidos
+            const getPedidos = async () => (await getHistoricoPedidos(userEmail))
+
+            data = await getPedidos(userEmail);
+
+            if (!data) {
+
+                throw new Error("Houve um erro ao entrar em contato com o servidor")
+            }
+
+        } catch (error) {
+
+            let li = document.createElement("li");
+
+            name = `list-group-item d-flex justify-content-center mb-2`
+
+            li.classList = name;
+            li.style.backgroundColor = '#ff2a00'
+            li.style.opacity = '80%'
+            li.style.color = 'white'
+
+            li.innerHTML = messageError(error.message)
+
+            ul.appendChild(li);
+        }
+
+        //Encerra o Loading...
+        ul.removeChild(li)
+
+        //Gera os cards de cada pedido feito 
+        generateData(data, userEmail);
+
+        //Caso não tenha pedidos feitos anteriormente, renderiza uma mensagem de erro
+        if (!accordion.children.length) {
+            let li = document.createElement("li");
+
+            name = `list-group-item d-flex justify-content-center mb-2`
+
+            li.classList = name;
+            li.style.backgroundColor = '#ff2a00'
+            li.style.opacity = '80%'
+            li.style.color = 'white'
+
+            li.innerHTML = messageError("Não foi possível encontrar pedidos anteriores.")
+
+            ul.appendChild(li);
+        } 
+    </script>
+
+</body>
+
+</html>

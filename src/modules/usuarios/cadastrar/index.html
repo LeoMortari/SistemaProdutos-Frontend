@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="./script.js"></script>
+    <script src="./api.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <title>Cadastro de Usuário</title>
+    </head>
+    <body>
+    <script>
+      function meu_retorno(conteudo) {
+      console.log(conteudo)
+      if (!("erro" in conteudo)) { // if(!"erro" in conteudo){
+          document.getElementById('logradouro').value = (conteudo.logradouro)
+          document.getElementById('bairro').value = (conteudo.bairro)
+          document.getElementById('cidade').value = (conteudo.localidade)
+          document.getElementById('uf').value = (conteudo.uf)
+          document.getElementById('ibge').value = (conteudo.ibge)
+      } else {
+          alert("CEP não encontrado.");
+      }
+      }
+      function PesquisaCep(valor) {
+      var cep = valor.replace(/\D/g, '')
+      var tamanho = cep.toString()
+      if (cep != "" && tamanho.length == 8) {
+          let validacep = /^[0-9]{8}$/
+          console.log(validacep.test(cep))
+          if (validacep.test(cep)) {
+              document.getElementById('logradouro').value = "..."
+              document.getElementById('bairro').value = '...'
+              document.getElementById('cidade').value = '...'
+              document.getElementById('uf').value = '...'
+              document.getElementById('ibge').value = '...'
+              var script = document.createElement('script');
+              script.src = ' https://viacep.com.br/ws/' + cep + '/json?callback=meu_retorno'
+              document.body.appendChild(script);
+            }
+              } else {
+                return alert("Erro em CEP!")
+              }
+           }
+
+      function ConfirmarSenha(){
+      var senha1 = document.getElementById("senha").value;
+      var confirma1 = document.getElementById("confirmasenha").value;
+        if (senha1 != confirma1){
+            window.alert("Senha não confere!!")     
+            document.getElementById("confirmasenha").value = null;    
+            document.getElementById("senha").value = null;        
+            return false;
+              }
+            return true;
+          }
+      
+  </script>
+    <div>
+      <h3 class="display-6">Restaurante do Japa</h3>
+      <img class="img" src="IMG/LogoResJapa.jpeg" >
+    </div>
+    <br>
+
+      <div class="container">
+      <div id="border">
+      <h2>Cadastrar Usuário</h2>
+      </div>      
+      </div>
+      <br>
+      <div class="card">
+      <div class="card-body" style="width: auto;">
+      <div class="container">
+      <div class=row>
+      <div class="col-md-12">
+      <main class="conteudo">
+      <div class="col mb-2">
+      <label class="form-label" for="nome">Nome:</label>
+      <input class="form-control" type="text" id="nome" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="cpf">CPF:</label>
+      <input class="form-control" type="text" id="cpf" pattern="[0-9]{11}" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="email">E-mail:</label>
+      <input class="form-control" type="email" id="email" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="senha">Senha:</label>
+      <input class="form-control" type="password"  maxlength="8" id="senha" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="confirmasenha">Confirmar Senha:</label>
+      <input class="form-control" type="password" id="confirmasenha" onblur="ConfirmarSenha()" placeholder="Preencher... " required >
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="telefone">Telefone:</label>
+      <input class="form-control" type="text" pattern="[0-9]({2})[0-9]{4,}-[0-9]{4}" id="telefone" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="cep">CEP:</label>
+      <input class="form-control" type="text" maxlength="8" id="cep"placeholder="Preencher... " onblur="PesquisaCep(this.value);" required/>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="logradouro">Logradouro:</label>
+      <input class="form-control" type="text" id="logradouro" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label  class="form-label" for="bairro">Bairro:</label>
+      <input class="form-control" type="text" id="bairro" placeholder="Preencher... " required>
+     </div>
+      <div class="col mb-2">
+      <label class="form-label" for="numero">Número:</label>
+      <input class="form-control" type="number" pattern="[0-9]" id="numero" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="uf">UF:</label>
+      <input class="form-control" type="text" maxlength="2" id="uf" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="cidade">Cidade:</label>
+      <input class="form-control" type="text" id="cidade" placeholder="Preencher... " required>
+      </div>
+      <div class="col mb-2">
+      <label class="form-label" for="ibge">IBGE:</label>
+      <input class="form-control" type="text" pattern="[0-9]" id="ibge" placeholder="Preencher... " required>
+      </div>
+      </div>
+    <br>
+    <div>
+    <button class="div1" type="submit"  onclick="handleSubmit()">Cadastrar Usuário</button>
+    </div>
+    <br>
+    <p>
+    <div>
+    <button  class="div1" type="submit" onclick="RetornarLogin()">Retornar ao Login</button>
+    </div></p>
+  </main>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+
