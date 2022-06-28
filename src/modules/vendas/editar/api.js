@@ -6,14 +6,14 @@ const getVendasId = async (id) => {
   }
 
   const getNomeVendedor = async () => {
-    fetch(`http://localhost:3000/usuario`)
+    fetch(`http://localhost:3000/usuario1`)
       .then((response) => response.json())
       .then((result) => criarselect(result))
       .catch((erro) => console.log("erro na request: " + erro))
 }
 
 const getIdPedido = async () => {
-  fetch(`http://localhost:3000/pedido`)
+  fetch(`http://localhost:3000/pedido1`)
     .then((response) => response.json())
     .then((result) => criarselectPedido(result))
     .catch((erro) => console.log("erro na request: " + erro))

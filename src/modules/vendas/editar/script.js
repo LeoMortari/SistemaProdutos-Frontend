@@ -31,7 +31,6 @@ const vendaId = async (userId) => {
     if (userId[0] == null) {
         return window.alert("ID não registrado!")
     }
-
     let table = `<table id="tabela_venda" class="table table-hover">
                     <thead class="thead" id="titulotab">
                         <tr scope="row">

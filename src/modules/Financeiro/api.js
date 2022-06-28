@@ -41,7 +41,7 @@ async function adicionaFinanceiro(valor) {
 
 
 const getProdutoEstoque = async () => (
-  fetch(`http://localhost:3000/estoque`)
+  fetch(`http://localhost:3000/estoque1`)
     .then((response) => response.json())
     .then((result) => result)
     .catch((erro) => console.log("erro na request: " + erro))
