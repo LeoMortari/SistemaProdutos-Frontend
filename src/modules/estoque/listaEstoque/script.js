@@ -6,7 +6,6 @@ function getListaEstoque(url) {
 }
 
 function criaLinha(produtosNoEstoque) {
-  console.log(produtosNoEstoque);
   let linha = document.createElement("tr");
   let tdId = document.createElement("td");
   let tdDescricao = document.createElement("td");
@@ -41,7 +40,6 @@ function listaProdutosEstoque() {
 async function listaProdutosEstoqueId() {
   let id = document.getElementById("idProdutoEstoque").value;
   let data = getListaEstoque("http://localhost:3000/estoque/listar/" + id);
-
   let produtosNoEstoque = JSON.parse(data);
   let tabela = document.getElementById("table");
 
