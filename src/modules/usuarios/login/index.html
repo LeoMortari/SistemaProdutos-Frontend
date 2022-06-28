@@ -68,26 +68,33 @@
           </div>
         </div>
       </div>
+      <br>
+
+      <div>
+        <button class="div1" style="float: left" class="div1" type="submit" onclick="ValidaUsuario()">Acessar</button>
+        <button class="div1" style=" float: rigth" type="submit" onclick="CadastrarUsuario()">Cadastrar Usuário</button>
+        <button class="div1" style=" float: rigth" type="submit" onclick="ListarUsuario()">Listar Usuário</button>
+
+      </div>
     </div>
-  </div>
-  <script>
+    <script>
 
-    async function ValidaUsuario() {
-      let email = document.getElementById("email").value
-      let senha = document.getElementById("senha").value
+      async function ValidaUsuario() {
+        let email = document.getElementById("email").value
+        let senha = document.getElementById("senha").value
 
-      let resultvalida = await getUsuarioRequest(email, senha)
-      if (parseInt(resultvalida) == 1) {
+        let resultvalida = await getUsuarioRequest(email, senha)
+        if (parseInt(resultvalida) == 1) {
 
-        sessionStorage.setItem("email", email);
+          sessionStorage.setItem("email", email);
 
-        location.href = '../../pedidos/index.html'
-      } else {
-        alert("Usuário não encontrado")
+          location.href = '../../pedidos/index.html'
+        } else {
+          alert("Usuário não encontrado")
+        }
       }
-    }
 
-  </script>
+    </script>
 </body>
 
 </html>
