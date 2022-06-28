@@ -38,7 +38,7 @@ function editItem(index) {
 async function handleSubmit() {
   let id_pk = document.getElementById("m-id").value;
   let obj = {};
-  // se o id existir, ele irá editar o cardapio, e se não existir, iá cadastrar os dados no cardapio
+  // se o id existir, ele irá editar o cardapio, e se não existir, irá cadastrar os dados no cardapio
   if(id_pk != '' && id_pk!= null){
     obj["id_pk"] = id_pk
     console.log("passou id: ", obj.id_pk)
